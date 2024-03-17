@@ -59,6 +59,9 @@ function playGame() {
             computerScore++;
             roundsPlayed++;
         }
+        else{
+            roundsPlayed++;
+        }
     }
 
     // after  loop complete, determine the winner and display the final scores
