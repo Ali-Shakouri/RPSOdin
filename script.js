@@ -1,4 +1,4 @@
-function getComputerChoice() {
+function getComputerChoice() { //function for random number generation between 0-3 and assigning rps to it, used for computer selection later
     let randomNumber = Math.floor(Math.random() * 3);
     let choice;
 
@@ -12,7 +12,7 @@ function getComputerChoice() {
 
     return choice;
 }
-
+//the funtionality for a round o RPS
 function playRound(playerSelection, computerSelection) {
     console.log("Player chose:", playerSelection);
     console.log("Computer chose:", computerSelection);
@@ -35,22 +35,22 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function playGame() {
-    // Define variables to keep track of scores and rounds played
+   
     let playerScore = 0;
     let computerScore = 0;
 
-    // Loop for 5 rounds
+    // loop for 5 rounds
     for (let i = 0; i < 5; i++) {
-        // Prompt player for choice
+        // prompt player for choice
         let playerSelection = prompt("Enter your choice (Rock, Paper, or Scissors):").toLowerCase();
         
         // Generate computer's choice
         let computerSelection = getComputerChoice();
 
-        // Call playRound function and update scores based on the result
+        // call playRound function and update scores based on the result
         let winner = playRound(playerSelection, computerSelection);
 
-        // Update scores based on the result of each round
+        // updatdeing scores based on the result of each round
         if (winner === 'player') {
             playerScore++;
         } else if (winner === 'computer') {
@@ -58,12 +58,12 @@ function playGame() {
         }
     }
 
-    // After the loop completes, determine the winner and display the final scores
+    // after  loop complete, determine the winner and display the final scores
     console.log("Final scores:");
     console.log("Player score:", playerScore);
     console.log("Computer score:", computerScore);
 
-    // Determine the overall winner
+    // determine the overall winner
     if (playerScore > computerScore) {
         console.log("Player wins the game!");
     } else if (playerScore < computerScore) {
@@ -73,5 +73,5 @@ function playGame() {
     }
 }
 
-// Call the playGame function to start the game
+
 playGame();
