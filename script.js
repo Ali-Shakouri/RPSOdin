@@ -51,7 +51,7 @@ function playGame() {
         // call playRound function and update scores based on the result
         let winner = playRound(playerSelection, computerSelection);
 
-        // updatdeing scores based on the result of each round
+        // updatdeing scores based on the result of each rounds
         if (winner === 'player') {
             playerScore++;
             roundsPlayed++;
