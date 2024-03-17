@@ -38,11 +38,12 @@ function playGame() {
    
     let playerScore = 0;
     let computerScore = 0;
+    let roundsPlayed=0;
 
     // loop for 5 rounds
     for (let i = 0; i < 5; i++) {
         // prompt player for choice
-        let playerSelection = prompt("Enter your choice (Rock, Paper, or Scissors):").toLowerCase();
+        let playerSelection = prompt(` 5 round RPS! Enter your choice (Rock, Paper, or Scissors): Rounds done: ${roundsPlayed}`).toLowerCase();
         
         // Generate computer's choice
         let computerSelection = getComputerChoice();
@@ -53,8 +54,10 @@ function playGame() {
         // updatdeing scores based on the result of each round
         if (winner === 'player') {
             playerScore++;
+            roundsPlayed++;
         } else if (winner === 'computer') {
             computerScore++;
+            roundsPlayed++;
         }
     }
 
