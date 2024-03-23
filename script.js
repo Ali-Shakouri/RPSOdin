@@ -1,4 +1,17 @@
-function getComputerChoice() { //function for random number generation between 0-3 and assigning rps to it, used for computer selection later
+let playerScore = 0;
+let computerScore = 0;
+let roundsPlayed = 0;
+const maxRounds = 5;
+
+const roundCounter = document.querySelector('#roundCounter');
+const resultElement = document.querySelector('#result');
+const winnerElement = document.querySelector('#winner');
+
+const rockButton = document.querySelector('.rockButton');
+const paperButton = document.querySelector('.paperButton');
+const scissorsButton = document.querySelector('.scissorsButton');
+
+function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3);
     let choice;
 
@@ -12,72 +25,62 @@ function getComputerChoice() { //function for random number generation between 0
 
     return choice;
 }
-//the funtionality for a round o RPS
-function playRound(playerSelection, computerSelection) {
-    console.log("Player chose:", playerSelection);
-    console.log("Computer chose:", computerSelection);
 
-    if (playerSelection === "stone") {
-        console.log("Player is silly!");
-    } else if (playerSelection === computerSelection) {
-        console.log("It's a tie!");
+function playRound(playerSelection, computerSelection) {
+    roundCounter.textContent = `Round ${roundsPlayed + 1} of ${maxRounds}`;
+
+    let resultMessage = "";
+
+    if (playerSelection === computerSelection) {
+        resultMessage = "It's a tie!";
     } else if (
         (playerSelection === "rock" && computerSelection === "scissors") ||
         (playerSelection === "paper" && computerSelection === "rock") ||
         (playerSelection === "scissors" && computerSelection === "paper")
     ) {
-        console.log("Player wins!");
-        return 'player';
+        resultMessage = "Player wins!";
+        playerScore++;
     } else {
-        console.log("Computer wins!");
-        return 'computer';
+        resultMessage = "Computer wins!";
+        computerScore++;
+    }
+
+    resultElement.textContent = resultMessage;
+
+    roundsPlayed++;
+    if (roundsPlayed === maxRounds) {
+        announceWinner();
     }
 }
 
-function playGame() {
-   
-    let playerScore = 0;
-    let computerScore = 0;
-    let roundsPlayed=0;
+function announceWinner() {
+    let winnerMessage = "";
 
-    // loop for 5 rounds
-    for (let i = 0; i < 5; i++) {
-        // prompt player for choice
-        let playerSelection = prompt(` 5 round RPS! Enter your choice (Rock, Paper, or Scissors): Rounds done: ${roundsPlayed}`).toLowerCase();
-        
-        // Generate computer's choice
-        let computerSelection = getComputerChoice();
-
-        // call playRound function and update scores based on the result
-        let winner = playRound(playerSelection, computerSelection);
-
-        // updatdeing scores based on the result of each rounds
-        if (winner === 'player') {
-            playerScore++;
-            roundsPlayed++;
-        } else if (winner === 'computer') {
-            computerScore++;
-            roundsPlayed++;
-        }
-        else{
-            roundsPlayed++;
-        }
-    }
-
-    // after  loop complete, determine the winner and display the final scores
-    console.log("Final scores:");
-    console.log("Player score:", playerScore);
-    console.log("Computer score:", computerScore);
-
-    // determine the overall winner
     if (playerScore > computerScore) {
-        console.log("Player wins the game!");
+        winnerMessage = "Player wins the game!";
     } else if (playerScore < computerScore) {
-        console.log("Computer wins the game!");
+        winnerMessage = "Computer wins the game!";
     } else {
-        console.log("It's a tie game!");
+        winnerMessage = "This game is a tie!";
     }
+
+    winnerElement.textContent = winnerMessage;
 }
 
+rockButton.addEventListener('click', () => {
+    if (roundsPlayed < maxRounds) {
+        playRound("rock", getComputerChoice());
+    }
+});
 
-playGame();
+paperButton.addEventListener('click', () => {
+    if (roundsPlayed < maxRounds) {
+        playRound("paper", getComputerChoice());
+    }
+});
+
+scissorsButton.addEventListener('click', () => {
+    if (roundsPlayed < maxRounds) {
+        playRound("scissors", getComputerChoice());
+    }
+});
