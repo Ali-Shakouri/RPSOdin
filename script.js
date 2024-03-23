@@ -10,7 +10,7 @@ const winnerElement = document.querySelector('#winner');
 const rockButton = document.querySelector('.rockButton');
 const paperButton = document.querySelector('.paperButton');
 const scissorsButton = document.querySelector('.scissorsButton');
-
+const restartButton=document.querySelector('.restartButton');
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3);
     let choice;
@@ -50,6 +50,8 @@ function playRound(playerSelection, computerSelection) {
     roundsPlayed++;
     if (roundsPlayed === maxRounds) {
         announceWinner();
+        restartGame();
+       
     }
 }
 
@@ -65,6 +67,7 @@ function announceWinner() {
     }
 
     winnerElement.textContent = winnerMessage;
+    restartGame();
 }
 
 rockButton.addEventListener('click', () => {
@@ -84,3 +87,14 @@ scissorsButton.addEventListener('click', () => {
         playRound("scissors", getComputerChoice());
     }
 });
+function restartGame(){
+  restartButton.addEventListener('click',()=>{
+    playerScore = 0;
+ computerScore = 0;
+ roundsPlayed = 0;
+ document.querySelector("#winner").innerHTML='';
+ document.querySelector("#result").innerHTML='';
+ roundCounter.textContent = `Round ${roundsPlayed} of ${maxRounds}`;
+ 
+  })
+}
